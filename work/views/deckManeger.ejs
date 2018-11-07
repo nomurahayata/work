@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+  <meta charset="utf-8">
+  <title></title>
+ </head>
+ <body>
+  <script>
+    //mysqlのデータを代入
+    var data = <%- JSON.stringify(images) %>;
+    var strImages;
+  　for(var i=0;i<9;i++){
+     //デッキのリンクの表示
+	 if(i%3==0){
+	   var j=i/3+1;
+	   document.write('<br><a id="dexk1" href = "/deck/'+j+'"class="square_btn">デッキ'+j+'</a><br>');
+	  }
+     //デッキ内の編成キャラを表示
+     strImages='<a href="/public/images/'+data[i].name+'.jpg"><img src=/public/images/'+data[i].name+'.jpg width=30 height=40 alt="キャラ参照"></a>';
+     document.write(strImages);
+    }
+
+  </script>
+ </body>
+</html>

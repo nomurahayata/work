@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title><%=name %></title>
+ </head>
+ <body>
+  <script>
+   //mysqlのデータを代入
+   var data=<%-JSON.stringify(data)%>;
+   var rarity="<%-rarity%>";
+   var writeRarity="";
+   //レア度に応じて★の数を増やす
+   for(var i=0;i<rarity;i++){
+    writeRarity+="★";
+   }
+   var name ="<%-name%>";
+   console.log(name);
+   //レア度とキャラの名前の表示
+   document.write("<center><span style='border-bottom: solid 5px;'><font color='#ffff00'>"+writeRarity+"</font></span></center>");
+   document.write("<center><b><font size='32'>【"+name+"】</font></b></center>");
+   //背景の色を白にして目立たなくする
+   //キャラ画像の表示
+   document.write("<center style='background-color:white'><img src=<%=image %>></center>");
+  </script>
+  
+  
+  
+ </body>
+</html>

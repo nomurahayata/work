@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="utf-8">
+   <title></title>
+   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+ </head>
+ <body>
+  <p>
+   <script>
+    //mysqlのデータを代入
+    var data = <%- JSON.stringify(images) %>;
+    var strImages;
+	//キャラクターの表示
+    for(var i=0;i<data.length;i++){
+      strImages='<a href="/public/images/'+data[i].name+'.jpg"><img src=/public/images/'+data[i].name+'.jpg width=30 height=40 alt="キャラ参照"></a>';
+      console.log(strImages);
+      document.write(strImages);
+    }
+   </script>
+  </p>
+ </body>
+</html>

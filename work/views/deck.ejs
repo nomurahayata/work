@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/public/deck.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  </head>
+  <body>
+
+    <div class='example'>
+     <script>
+      var deckCharacterNo=0;
+      var deckCharacters;
+       var data = <%- JSON.stringify(images) %>;
+       var deckname=<%- deckname%>;
+       var deckIds;
+       var aDelete=false;
+       document.write('デッキ'+deckname+'<br>');
+        var strImages
+       console.log(data.length);
+       for(var i=0;i<data.length;i++){
+         //strImages='<a href="/public/images/'+data[i].name+'.jpg"><img src=/public/images/'+data[i].name+'.jpg width=30 height=40 alt="キャラ参照"></a>';
+         strImages='<input id='+i+' type="image" src="/public/images/'+data[i].name+'.jpg" width=30 height=40 alt="キャラ" >'
+         console.log(strImages);
+        document.write(strImages);
+       }
+       var v=[false,false,false];
+       $(function(){
+        $("input").click(function(){
+
+            var idCheck = document.getElementsByTagName('p');
+          for(var i=0;i<idCheck.length;i++){
+            if(this.id==idCheck[i].id){
+              console.log(idCheck[i].innerHTML);
+              v[idCheck[i].innerHTML]=false;
+              console.log(v[idCheck[i].innerHTML]);
+              deckCharacterNo=0;
+              idCheck[i].remove();
+              if(aDelete){
+                var n=document.getElementsByTagName('a');
+                n.remove();
+                aDelete=false;
+              }
+              return;
+            }
+          }
+         for(var i=0;i<v.length;i++){
+            //if(deckCharacter[i]==NULL){
+            if(!v[i]){
+              v[i]=true;
+              deckCharacterNo=i;
+              break;
+            }
+            if(v[0]&&v[1]&&v[2]){
+
+          return;
+          }
+         }
+         //deckCharacters[deckCharacterNo]=names;
+         //console.log(this.id);
+
+        $(this).after('<p id='+this.id+'>'+deckCharacterNo+'</p>');
+         if(v[0]&&v[1]&&v[2]){
+           idCheck = document.getElementsByTagName('p');
+           deckIds=[];
+           for(var i=0; i<idCheck.length;i++){
+             console.log(data[idCheck[i].id]);
+             console.log(data[idCheck[i].id]);
+             aDelete=true;
+
+           deckIds = ""+deckname+","+idCheck[0].id+","+idCheck[1].id+","+idCheck[2].id+"" ;
+
+         }
+         console.log(deckIds);
+          console.log('<a href="/deckManeger/'+deckIds+'">決定</a><br>');
+         document.write('<a href="/deckManeger/'+deckIds+'">決定</a><br>');
+         console.log(deckIds);
+       }
+
+            });
+       });
+
+     </script>
+   </div>
+  </body>
+</html>
