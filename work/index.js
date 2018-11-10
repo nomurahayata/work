@@ -3,6 +3,8 @@ var app = express();
 var mysql = require('mysql');
 var moment = require('moment');
 var ejs = require('ejs');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 app.engine('ejs', ejs.renderFile);
 var connection = mysql.createConnection({
 	host: 'localhost',
@@ -151,13 +153,23 @@ app.get('/deck/:deckname', function (req, res) {
 		});
 	});
 });
-
+//チャット機能
+app.get('/chat',function(req,res){
+	res.render('chat.ejs');
+})
+//チャットの送受信
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
 //最初のところ
 app.get('/', function (req, res) {
 	res.render('index.ejs');
 });
-
 //サーバー開く
-app.listen(3000, function (req, res) {
-	console.log("ひらいたよ");
-});
+http.listen(3000,function() { console.log('listen on *：3000'); });
+//サーバー開く
+//app.listen(3000, function (req, res) {
+//	console.log("ひらいたよ");
+//});
